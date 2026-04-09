@@ -4,14 +4,13 @@ const router = require("express").Router();
 // GET all or filter by category
 router.get("/", async (req, res) => {
     try {
-        let sql = "SELECT id, category, question, answer1, answer2, answer3, answer4 FROM question";
+        let sql = "SELECT id, category, text AS question, answer1, answer2, answer3, answer4 FROM question";
         const params = [];
 
         if (req.query.category) {
             sql += " WHERE category = ?";
             params.push(req.query.category);
-        }
-
+        } 
         const [rows] = await pool.query(sql, params);
         res.status(200).json(rows);
     } catch (ex) {
@@ -22,7 +21,7 @@ router.get("/", async (req, res) => {
 // GET by ID
 router.get("/:id", async (req, res) => {
     try {
-        const [rows] = await pool.query("SELECT id, category, text, answer1, answer2, answer3, answer4 FROM question WHERE id = ?", [req.params.id]);
+        const [rows] = await pool.query("SELECT id, category, text AS question, answer1, answer2, answer3, answer4 FROM question WHERE id = ?", [req.params.id]);
         
         if (rows.length === 0) {
             return res.status(404).json({ message: "Question not found" });
@@ -39,7 +38,7 @@ router.post("/", async (req, res) => {
     try {
         // We stringify the answers array to store it in a JSON or TEXT column
         const [result] = await pool.query(
-            "INSERT INTO question (category, text, answer1, answer2. answer3. answer4) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO question (category, text AS question, answer1, answer2. answer3. answer4) VALUES (?, ?, ?, ?, ?, ?)",
             [category, question, answers.answer1, answers.answer2, answers.answer3, answers.answer4]
         );
         
