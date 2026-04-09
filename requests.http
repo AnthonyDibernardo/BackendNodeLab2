@@ -1,0 +1,39 @@
+### Get all trivia questions
+GET http://localhost:8080/api/trivia
+
+
+### Get all Sports questions
+GET http://localhost:8080/api/trivia?category=Sports
+
+
+### Get question by ID
+GET http://localhost:8080/api/trivia/1
+
+
+### Post a question
+POST http://localhost:8080/api/trivia
+Content-Type: application/json
+
+{
+  "category": "Movies",
+  "question": "Which actor was the first to play Spider-Man?",
+  "answers": [
+    "Tom Holland",
+    "Andrew Garfield",
+    "Tobey Maguire",
+    "Christopher Reeve"
+  ]
+}
+
+
+### Update question with given song ID
+PUT http://localhost:8080/api/trivia/REPLACE-ME
+Content-Type: application/json
+
+{
+  "question": "For what movie did Tom Hanks score his first Academy Award nomination?"
+}
+
+
+### Delete question with this ID
+DELETE http://localhost:8080/api/trivia/REPLACE-ME
